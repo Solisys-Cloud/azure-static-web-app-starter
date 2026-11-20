@@ -1,0 +1,40 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bicep:
+    name: Build Bicep template
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Bicep build and lint
+        run: |
+          az bicep install
+          az bicep build --file infra/main.bicep --stdout > /dev/null
+          az bicep build-params --file infra/main.bicepparam --stdout > /dev/null
+
+  site:
+    name: Check site files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Required files are present
+        run: |
+          for f in site/index.html site/404.html site/robots.txt site/staticwebapp.config.json site/og-image.jpg; do
+            test -f "$f" || { echo "Missing $f"; exit 1; }
+          done
+
+      - name: Config file is valid JSON
+        run: python3 -m json.tool site/staticwebapp.config.json > /dev/null

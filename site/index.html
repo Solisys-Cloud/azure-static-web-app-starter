@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Demo site: remove the next line when the site goes live -->
+<meta name="robots" content="noindex, nofollow">
+<title>Nubrivo Tech - Azure and Microsoft 365 consulting (demo)</title>
+<meta name="description" content="Fictional Azure and Microsoft 365 consulting firm, used as a one-page website template for Azure Static Web Apps.">
+
+<!-- Link preview (Open Graph): replace the URLs with your custom domain -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://demo.example.com/">
+<meta property="og:title" content="Nubrivo Tech - Azure and Microsoft 365">
+<meta property="og:description" content="Secure, well-governed Microsoft cloud for small and mid-sized organizations.">
+<meta property="og:image" content="https://demo.example.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* Design tokens: change these to match your brand */
+  :root{
+    --navy:#0B1F33; --navy-2:#132C47; --blue:#2563EB; --blue-dark:#1D4ED8; --cyan:#22B8CF;
+    --ink:#0F1B2A; --muted:#5A6878; --bg:#F6F8FB; --card:#FFFFFF; --line:#E2E8F0; --ok:#16A34A;
+    --r-s:8px; --r-l:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;font-size:17px}
+  h1,h2,h3,.logo{font-family:"Sora","Inter",sans-serif;line-height:1.15;color:var(--navy);letter-spacing:-.01em}
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--cyan);outline-offset:3px;border-radius:4px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  .skip{position:absolute;left:-999px;top:8px;background:var(--navy);color:#fff;padding:8px 14px;z-index:99}
+  .skip:focus{left:8px}
+  .eyebrow{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+
+  nav{position:sticky;top:0;z-index:20;background:rgba(246,248,251,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;gap:20px}
+  .logo{font-size:20px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:10px}
+  .logo i{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:block}
+  nav ul{display:flex;gap:28px;list-style:none;font-weight:500;font-size:15px}
+  nav ul a{text-decoration:none;color:var(--muted)}
+  nav ul a:hover{color:var(--navy)}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:var(--r-s);font-weight:600;text-decoration:none;font-size:16px}
+  .btn-main{background:var(--blue);color:#fff}
+  .btn-main:hover{background:var(--blue-dark)}
+  .btn-ghost{border:1.5px solid var(--line);background:#fff;color:var(--navy)}
+  .btn-ghost:hover{border-color:var(--navy)}
+  .btn-sm{padding:9px 16px;font-size:15px}
+
+  /* Hero */
+  .hero{padding:64px 0 76px}
+  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .hero h1{font-size:clamp(38px,5vw,58px);margin-bottom:18px}
+  .hero h1 span{color:var(--blue)}
+  .lead{font-size:19px;color:var(--muted);max-width:32em;margin-bottom:28px}
+  .cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px}
+  .proof{display:flex;flex-wrap:wrap;gap:10px}
+  .proof span{font-size:14px;font-weight:500;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--muted)}
+  .diagram{background:var(--navy);border-radius:var(--r-l);padding:26px;box-shadow:0 30px 60px -30px rgba(11,31,51,.6)}
+  .diagram svg{width:100%;height:auto;display:block}
+
+  section{padding:88px 0}
+  .head{max-width:660px;margin-bottom:40px}
+  .head h2{font-size:clamp(30px,3.6vw,42px);margin-bottom:12px}
+  .head p{color:var(--muted)}
+
+  /* Services */
+  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .svc{background:var(--card);border:1px solid var(--line);border-radius:var(--r-l);padding:28px}
+  .svc .ico{width:44px;height:44px;border-radius:10px;background:#EAF1FE;display:grid;place-items:center;margin-bottom:18px}
+  .svc .ico svg{width:24px;height:24px;stroke:var(--blue)}
+  .svc h3{font-size:21px;margin-bottom:8px}
+  .svc p{color:var(--muted);font-size:16px;margin-bottom:14px}
+  .svc ul{list-style:none;font-size:15px;display:grid;gap:6px}
+  .svc li{padding-left:20px;position:relative}
+  .svc li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:2px;background:var(--cyan)}
+
+  /* Method */
+  .method{background:var(--navy);color:#C9D4E2}
+  .method h2{color:#fff}
+  .method .head p{color:#9FB0C4}
+  .method .eyebrow{color:var(--cyan)}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:s}
+  .step{border:1px solid rgba(255,255,255,.12);border-radius:var(--r-l);padding:24px;background:var(--navy-2)}
+  .step::before{counter-increment:s;content:"0" counter(s);font-family:"Sora",sans-serif;font-weight:700;color:var(--cyan);font-size:15px;display:block;margin-bottom:10px}
+  .step h3{color:#fff;font-size:19px;margin-bottom:6px}
+  .step p{font-size:15px}
+
+  /* Offers */
+  .offers{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .offer{background:var(--card);border:1px solid var(--line);border-radius:var(--r-l);padding:28px;display:flex;flex-direction:column}
+  .offer.featured{border:2px solid var(--blue);box-shadow:0 20px 40px -24px rgba(37,99,235,.45)}
+  .offer .tag{font-size:13px;font-weight:600;color:var(--blue);margin-bottom:8px}
+  .offer h3{font-size:22px;margin-bottom:10px}
+  .offer .dur{font-size:15px;color:var(--muted);margin-bottom:16px}
+  .offer ul{list-style:none;display:grid;gap:8px;font-size:15px;margin-bottom:22px;flex:1}
+  .offer li{padding-left:22px;position:relative}
+  .offer li::before{content:"";position:absolute;left:2px;top:6px;width:10px;height:6px;border-left:2px solid var(--ok);border-bottom:2px solid var(--ok);transform:rotate(-45deg)}
+
+  /* Contact */
+  .contact{background:linear-gradient(135deg,var(--blue),#1E3A8A);border-radius:var(--r-l);padding:48px;color:#DCE6FF;display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:center}
+  .contact h2{color:#fff;font-size:clamp(28px,3.4vw,38px);margin-bottom:10px}
+  .contact .btn-main{background:#fff;color:var(--navy)}
+  .contact .btn-main:hover{background:#EAF1FE}
+  .contact dl{display:grid;gap:10px;font-size:16px}
+  .contact dt{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:#AFC3F5}
+  .contact dd a{color:#fff;font-weight:600}
+
+  footer{padding:36px 0;font-size:14px;color:var(--muted);border-top:1px solid var(--line);margin-top:88px}
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+  @media (max-width:960px){
+    .services,.offers{grid-template-columns:1fr 1fr}
+    .steps{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:760px){
+    nav ul{display:none}
+    .hero{padding:36px 0 56px}
+    .hero .wrap,.contact{grid-template-columns:1fr;gap:32px}
+    .services,.offers,.steps{grid-template-columns:1fr}
+    section{padding:60px 0}
+    .contact{padding:30px}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+
+<nav aria-label="Main">
+  <div class="wrap">
+    <a href="#" class="logo"><i aria-hidden="true"></i>Nubrivo Tech</a>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#method">Approach</a></li>
+      <li><a href="#offers">Engagements</a></li>
+    </ul>
+    <a href="#contact" class="btn btn-main btn-sm">Book a call</a>
+  </div>
+</nav>
+
+<main id="content">
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Azure and Microsoft 365 consulting</span>
+      <h1>A secure, well-governed <span>Microsoft cloud</span> for growing organizations</h1>
+      <p class="lead">We assess, design and harden Azure and Microsoft 365 environments, from identity to landing zones, with clear deliverables and a fixed scope.</p>
+      <div class="cta">
+        <a href="#contact" class="btn btn-main">Book a 30-minute call</a>
+        <a href="#offers" class="btn btn-ghost">See engagements</a>
+      </div>
+      <div class="proof" aria-label="Focus areas">
+        <span>Entra ID</span><span>Conditional Access</span><span>Azure Landing Zones</span><span>Defender</span><span>NIS2 readiness</span>
+      </div>
+    </div>
+
+    <div class="diagram" role="img" aria-label="Diagram: users and devices protected by Entra ID and Conditional Access, connected to Microsoft 365 and to an Azure hub and spoke landing zone">
+      <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+        <defs>
+          <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#22B8CF"/></marker>
+        </defs>
+        <rect x="20" y="20" width="120" height="60" rx="10" fill="#132C47" stroke="#2E4A6B"/>
+        <text x="80" y="47" fill="#fff" font-size="14" font-weight="600" text-anchor="middle">Users</text>
+        <text x="80" y="66" fill="#9FB0C4" font-size="12" text-anchor="middle">and devices</text>
+
+        <rect x="180" y="20" width="140" height="60" rx="10" fill="#1D4ED8"/>
+        <text x="250" y="47" fill="#fff" font-size="14" font-weight="600" text-anchor="middle">Entra ID</text>
+        <text x="250" y="66" fill="#DCE6FF" font-size="12" text-anchor="middle">MFA, Conditional Access</text>
+
+        <rect x="360" y="20" width="100" height="60" rx="10" fill="#132C47" stroke="#2E4A6B"/>
+        <text x="410" y="47" fill="#fff" font-size="14" font-weight="600" text-anchor="middle">Microsoft</text>
+        <text x="410" y="66" fill="#9FB0C4" font-size="12" text-anchor="middle">365</text>
+
+        <line x1="140" y1="50" x2="176" y2="50" stroke="#22B8CF" stroke-width="2" marker-end="url(#a)"/>
+        <line x1="320" y1="50" x2="356" y2="50" stroke="#22B8CF" stroke-width="2" marker-end="url(#a)"/>
+        <line x1="250" y1="80" x2="250" y2="126" stroke="#22B8CF" stroke-width="2" marker-end="url(#a)"/>
+
+        <rect x="20" y="130" width="440" height="210" rx="12" fill="none" stroke="#2E4A6B" stroke-dasharray="5 5"/>
+        <text x="36" y="154" fill="#9FB0C4" font-size="12" font-weight="600">AZURE LANDING ZONE</text>
+
+        <rect x="180" y="170" width="140" height="56" rx="10" fill="#132C47" stroke="#22B8CF"/>
+        <text x="250" y="195" fill="#fff" font-size="14" font-weight="600" text-anchor="middle">Hub</text>
+        <text x="250" y="213" fill="#9FB0C4" font-size="12" text-anchor="middle">Firewall, DNS, VPN</text>
+
+        <rect x="40" y="262" width="120" height="56" rx="10" fill="#132C47" stroke="#2E4A6B"/>
+        <text x="100" y="287" fill="#fff" font-size="14" font-weight="600" text-anchor="middle">Spoke</text>
+        <text x="100" y="305" fill="#9FB0C4" font-size="12" text-anchor="middle">Production</text>
+
+        <rect x="180" y="262" width="140" height="56" rx="10" fill="#132C47" stroke="#2E4A6B"/>
+        <text x="250" y="287" fill="#fff" font-size="14" font-weight="600" text-anchor="middle">Spoke</text>
+        <text x="250" y="305" fill="#9FB0C4" font-size="12" text-anchor="middle">Test</text>
+
+        <rect x="340" y="262" width="100" height="56" rx="10" fill="#132C47" stroke="#2E4A6B"/>
+        <text x="390" y="287" fill="#fff" font-size="14" font-weight="600" text-anchor="middle">Monitor</text>
+        <text x="390" y="305" fill="#9FB0C4" font-size="12" text-anchor="middle">Logs, Defender</text>
+
+        <line x1="220" y1="226" x2="110" y2="262" stroke="#22B8CF" stroke-width="2"/>
+        <line x1="250" y1="226" x2="250" y2="262" stroke="#22B8CF" stroke-width="2"/>
+        <line x1="290" y1="226" x2="380" y2="262" stroke="#22B8CF" stroke-width="2"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section id="services">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Services</span>
+      <h2>Three areas, one goal: a cloud you can trust</h2>
+      <p>Focused expertise on the Microsoft stack, delivered by senior consultants.</p>
+    </div>
+    <div class="services">
+      <article class="svc">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Microsoft 365 security</h3>
+        <p>Protect accounts, email and data without slowing people down.</p>
+        <ul><li>Entra ID and MFA rollout</li><li>Conditional Access baseline</li><li>Defender for Office 365</li><li>Secure Score improvement plan</li></ul>
+      </article>
+      <article class="svc">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.8A6 6 0 0 0 4.5 12a4 4 0 0 0 .5 7z"/></svg></div>
+        <h3>Azure foundations</h3>
+        <p>A landing zone that is governed, secure and ready to grow.</p>
+        <ul><li>Hub and spoke networking</li><li>Policies, RBAC and tagging</li><li>Infrastructure as Code with Bicep or Terraform</li><li>Cost management</li></ul>
+      </article>
+      <article class="svc">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg></div>
+        <h3>Identity and Active Directory</h3>
+        <p>Modernize identity and remove the risks of legacy setups.</p>
+        <ul><li>Active Directory health check and hardening</li><li>Hybrid identity with Entra Connect</li><li>Windows Hello for Business</li><li>Legacy protocol retirement</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="method" class="method">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Approach</span>
+      <h2>From assessment to a stable run</h2>
+      <p>Every engagement follows the same four steps, with written deliverables at each stage.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>Assess</h3><p>Review the current setup with read-only access and interviews.</p></div>
+      <div class="step"><h3>Design</h3><p>Target architecture, risks and a prioritized roadmap.</p></div>
+      <div class="step"><h3>Implement</h3><p>Changes in small, reversible steps, tested before production.</p></div>
+      <div class="step"><h3>Run</h3><p>Handover, documentation and optional monthly follow-up.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="offers">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Engagements</span>
+      <h2>Fixed-scope engagements</h2>
+      <p>Clear deliverables and a known duration. Pricing on request.</p>
+    </div>
+    <div class="offers">
+      <article class="offer">
+        <span class="tag">Start here</span>
+        <h3>Microsoft 365 security assessment</h3>
+        <p class="dur">About 3 days</p>
+        <ul><li>Identity, email and device review</li><li>Secure Score analysis</li><li>Risk report and quick wins</li></ul>
+        <a href="#contact" class="btn btn-ghost">Discuss</a>
+      </article>
+      <article class="offer featured">
+        <span class="tag">Most requested</span>
+        <h3>Identity hardening</h3>
+        <p class="dur">About 5 to 10 days</p>
+        <ul><li>MFA and Conditional Access rollout</li><li>Privileged access review</li><li>Legacy authentication blocked</li><li>Runbook for the IT team</li></ul>
+        <a href="#contact" class="btn btn-main">Discuss</a>
+      </article>
+      <article class="offer">
+        <span class="tag">Build</span>
+        <h3>Azure landing zone</h3>
+        <p class="dur">About 10 to 15 days</p>
+        <ul><li>Hub and spoke design</li><li>Governance with Azure Policy</li><li>Deployment as code, documented</li></ul>
+        <a href="#contact" class="btn btn-ghost">Discuss</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="padding-top:0">
+  <div class="wrap">
+    <div class="contact">
+      <div>
+        <h2>Let's look at your environment</h2>
+        <p>A 30-minute call to understand your context. No commitment.</p>
+        <p style="margin-top:22px"><a class="btn btn-main" href="mailto:hello@nubrivo.example?subject=Call%20request">Request a call</a></p>
+      </div>
+      <dl>
+        <div><dt>Email</dt><dd><a href="mailto:hello@nubrivo.example">hello@nubrivo.example</a></dd></div>
+        <div><dt>Phone</dt><dd><a href="tel:+32400000000">+32 400 00 00 00</a></dd></div>
+        <div><dt>Location</dt><dd>Remote, Belgium and Europe</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Nubrivo Tech is a fictional company used as a website template.</span>
+    <span>Hosted on Azure Static Web Apps</span>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,15 @@
+# Compiled Bicep
+infra/*.json
+
+# Local SWA CLI files
+.swa/
+swa-cli.config.json
+
+# Secrets and local settings
+*.env
+.env*
+
+# OS and editor
+.DS_Store
+Thumbs.db
+.vscode/
