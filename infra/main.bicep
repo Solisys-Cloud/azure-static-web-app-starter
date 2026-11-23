@@ -2,6 +2,8 @@
 // Deploy with:
 //   az deployment group create --resource-group <rg> --template-file infra/main.bicep --parameters infra/main.bicepparam
 
+metadata author = 'Olivier Lumeau'
+
 targetScope = 'resourceGroup'
 
 @description('Name of the Static Web App (unique in the resource group).')
